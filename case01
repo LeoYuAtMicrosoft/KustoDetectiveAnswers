@@ -1,0 +1,9 @@
+Shelves
+| mv-expand rf_ids
+| extend RID = tostring(rf_ids)
+| join (Books) on $left.RID == $right.rf_id
+| summarize sum(weight_gram) by shelf, total_weight
+| extend diff = total_weight -  sum_weight_gram
+| order by diff
+ 
+ -- 4242
